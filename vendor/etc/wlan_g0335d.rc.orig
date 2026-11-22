@@ -1,0 +1,13 @@
+# GREE G0335D / dbg51 (3.18.71) WLAN module bring-up
+# Kernel has CONFIG_QCA_CLD_WLAN=m but the ROM ships no wlan.ko.
+# Load before class_start hal so wifi@1.0-service can own fwpath.
+# QCA firmware itself already lives in /firmware/image (ueventd search path).
+on late-fs
+    insmod /vendor/lib/modules/wlan.ko
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+    chmod 0664 /sys/module/wlan/parameters/fwpath
+    setprop wlan.driver.status ok
+
+on property:sys.boot_completed=1
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+    setprop wlan.driver.status ok

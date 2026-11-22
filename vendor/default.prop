@@ -1,0 +1,7 @@
+#
+# ADDITIONAL VENDOR DEFAULT PROPERTIES
+#
+ro.zygote=zygote64_32
+tombstoned.max_tombstone_count=50
+debug.atrace.tags.enableflags=0
+ro.device.cache_dir=/data/cache

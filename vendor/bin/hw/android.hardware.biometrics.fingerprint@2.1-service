@@ -1,0 +1,5 @@
+#!/system/bin/sh
+# GREE G0335D / LOS15.1 fps_hal launcher.
+# Restores the /dev/binder thread pool that fingerprintd used to provide on 7.1.
+export LD_PRELOAD=/vendor/lib64/libfp_binder_shim.so
+exec /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service.real "$@"

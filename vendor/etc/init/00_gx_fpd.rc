@@ -1,0 +1,12 @@
+# GREE G0335D - official Goodix fingerprint daemon for LOS 15.1 (Android 8.1).
+# The official upper HAL /vendor/lib64/hw/fingerprint.qcom.so (182352 B,
+# derived from fingerprint.default.so) uses libfp_client.so to connect to the
+# "goodix.fp" binder service. gx_fpd provides that service via libfpservice.so
+# and owns the lower HAL (gxfingerprint.default.so) + QSEE TA lifecycle.
+# It MUST be running before fps_hal calls openHal().
+# Filename prefix 00_ makes init parse this service before
+# android.hardware.biometrics.fingerprint@2.1-service.rc (class late_start).
+service gx_fpd /vendor/bin/gx_fpd
+    class late_start
+    user system
+    group system input drmrpc
