@@ -528,3 +528,6 @@ $(call inherit-product-if-exists, vendor/qcom/binaries/msm8996/graphics/graphics
 PRODUCT_COPY_FILES += \
     vendor/gree/g0335d/vendor/lib64/libgrallocutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libgrallocutils.so \
     vendor/gree/g0335d/vendor/lib/libgrallocutils.so:$(TARGET_COPY_OUT_VENDOR)/lib/libgrallocutils.so
+
+PRODUCT_PACKAGES += \
+    libprotobuf_stub_cne
