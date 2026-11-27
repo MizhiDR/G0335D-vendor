@@ -243,3 +243,9 @@ ifneq ($(TARGET_HAVE_QC_PERF),true)
 endif
 
 endif
+
+# The build stops scanning at this Android.mk, so subdirectories must be
+# included explicitly.
+ifeq ($(TARGET_DEVICE),g0335d)
+include $(LOCAL_PATH)/protobuf_stub/Android.mk
+endif

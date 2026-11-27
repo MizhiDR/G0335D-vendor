@@ -536,3 +536,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/gree/g0335d/vendor/bin/hw/android.hardware.graphics.composer@2.1-service:$(TARGET_COPY_OUT_VENDOR)/bin/hw/android.hardware.graphics.composer@2.1-service \
     vendor/gree/g0335d/vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.graphics.composer@2.1-service.rc
+
+# Camera: 32-bit libs needed by camera.msm8996.so / mm-qcamera-daemon
+# (dependency closure; were missing on device -> camera HAL failed to load)
+PRODUCT_COPY_FILES += \
+    vendor/gree/g0335d/vendor/lib/libarcsoft_dualcam_refocus.so:system/vendor/lib/libarcsoft_dualcam_refocus.so \
+    vendor/gree/g0335d/vendor/lib/libarcsoft_high_dynamic_range.so:system/vendor/lib/libarcsoft_high_dynamic_range.so \
+    vendor/gree/g0335d/vendor/lib/libarcsoft_jpeg_codec.so:system/vendor/lib/libarcsoft_jpeg_codec.so \
+    vendor/gree/g0335d/vendor/lib/libarcsoft_panorama.so:system/vendor/lib/libarcsoft_panorama.so \
+    vendor/gree/g0335d/vendor/lib/libmmcamera_llvd.so:system/vendor/lib/libmmcamera_llvd.so \
+    vendor/gree/g0335d/vendor/lib/libmmcamera_paaf_lib.so:system/vendor/lib/libmmcamera_paaf_lib.so \
+    vendor/gree/g0335d/vendor/lib/libmmcamera_quadracfa.so:system/vendor/lib/libmmcamera_quadracfa.so \
+    vendor/gree/g0335d/vendor/lib/libturbojpeg.so:system/vendor/lib/libturbojpeg.so \
+    vendor/gree/g0335d/vendor/lib/libC2D2.so:system/vendor/lib/libC2D2.so \
+    vendor/gree/g0335d/vendor/lib/libgsl.so:system/vendor/lib/libgsl.so \
+    vendor/gree/g0335d/vendor/lib/libOpenCL.so:system/vendor/lib/libOpenCL.so
