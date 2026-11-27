@@ -551,3 +551,12 @@ PRODUCT_COPY_FILES += \
     vendor/gree/g0335d/vendor/lib/libC2D2.so:system/vendor/lib/libC2D2.so \
     vendor/gree/g0335d/vendor/lib/libgsl.so:system/vendor/lib/libgsl.so \
     vendor/gree/g0335d/vendor/lib/libOpenCL.so:system/vendor/lib/libOpenCL.so
+
+# Bluetooth HAL (QTI): without it com.android.bluetooth aborts with
+# "Check failed: btHci != nullptr"
+PRODUCT_COPY_FILES += \
+    vendor/gree/g0335d/vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti:system/vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti \
+    vendor/gree/g0335d/vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc:system/vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc \
+    vendor/gree/g0335d/vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so:system/vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so \
+    vendor/gree/g0335d/vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so:system/vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so \
+    vendor/gree/g0335d/vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so:system/vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
