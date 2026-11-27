@@ -560,3 +560,12 @@ PRODUCT_COPY_FILES += \
     vendor/gree/g0335d/vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so:system/vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so \
     vendor/gree/g0335d/vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so:system/vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so \
     vendor/gree/g0335d/vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so:system/vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
+
+# Stock 7.1.2 protobuf (2.6-era ABI) for the CNE blobs. Renamed so it does
+# not clash with Android 8.1's libprotobuf-cpp-*; libcne, libcneapiclient
+# and libsettings have their DT_NEEDED patched to these names.
+PRODUCT_COPY_FILES += \
+    vendor/gree/g0335d/proprietary/vendor/lib/libprotobuf-cpp-lit7.so:system/vendor/lib/libprotobuf-cpp-lit7.so \
+    vendor/gree/g0335d/proprietary/vendor/lib/libprotobuf-cpp-ful7.so:system/vendor/lib/libprotobuf-cpp-ful7.so \
+    vendor/gree/g0335d/proprietary/vendor/lib64/libprotobuf-cpp-lit7.so:system/vendor/lib64/libprotobuf-cpp-lit7.so \
+    vendor/gree/g0335d/proprietary/vendor/lib64/libprotobuf-cpp-ful7.so:system/vendor/lib64/libprotobuf-cpp-ful7.so
