@@ -492,9 +492,7 @@ PRODUCT_PACKAGES += \
     embms \
     fastdormancy \
     shutdownlistener \
-    CNEService \
     QtiTetherService \
-    com.qualcomm.location \
     dpmserviceapp \
     qcrilmsgtunnel \
     colorservice \
@@ -537,6 +535,56 @@ PRODUCT_COPY_FILES += \
     vendor/gree/g0335d/vendor/bin/hw/android.hardware.graphics.composer@2.1-service:$(TARGET_COPY_OUT_VENDOR)/bin/hw/android.hardware.graphics.composer@2.1-service \
     vendor/gree/g0335d/vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.graphics.composer@2.1-service.rc
 
+# === v11: full stock display/HWC stack (fix private_handle ints 25/19 mismatch) ===
+# blob gralloc emits 25-int private_handle; source-built HWC/SDM/qdMetaData parse 19 ints.
+# Always copy the stock set together - partial mix => SIGSEGV in AdrenoMemInfo.
+V11_DISP_64 := \
+    vendor/gree/g0335d/vendor/lib64/hw/hwcomposer.msm8996.so:system/vendor/lib64/hw/hwcomposer.msm8996.so \
+    vendor/gree/g0335d/vendor/lib64/libsdmcore.so:system/vendor/lib64/libsdmcore.so \
+    vendor/gree/g0335d/vendor/lib64/libsdmutils.so:system/vendor/lib64/libsdmutils.so \
+    vendor/gree/g0335d/vendor/lib64/libsdmextension.so:system/vendor/lib64/libsdmextension.so \
+    vendor/gree/g0335d/vendor/lib64/libsdm-color.so:system/vendor/lib64/libsdm-color.so \
+    vendor/gree/g0335d/vendor/lib64/libsdm-diag.so:system/vendor/lib64/libsdm-diag.so \
+    vendor/gree/g0335d/vendor/lib64/libsdm-disp-vndapis.so:system/vendor/lib64/libsdm-disp-vndapis.so \
+    vendor/gree/g0335d/vendor/lib64/libqdutils.so:system/vendor/lib64/libqdutils.so \
+    vendor/gree/g0335d/vendor/lib64/libqdMetaData.so:system/vendor/lib64/libqdMetaData.so \
+    vendor/gree/g0335d/vendor/lib64/libdrmutils.so:system/vendor/lib64/libdrmutils.so \
+    vendor/gree/g0335d/vendor/lib64/libqservice.so:system/vendor/lib64/libqservice.so \
+    vendor/gree/g0335d/vendor/lib64/libhwc2on1adapter.so:system/vendor/lib64/libhwc2on1adapter.so \
+    vendor/gree/g0335d/vendor/lib64/vendor.display.config@1.0_vendor.so:system/vendor/lib64/vendor.display.config@1.0_vendor.so \
+    vendor/gree/g0335d/vendor/lib64/vendor.display.config@1.1_vendor.so:system/vendor/lib64/vendor.display.config@1.1_vendor.so \
+    vendor/gree/g0335d/vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so:system/vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so \
+    vendor/gree/g0335d/vendor/lib64/hw/android.hardware.graphics.composer@2.1-impl.so:system/vendor/lib64/hw/android.hardware.graphics.composer@2.1-impl.so \
+    vendor/gree/g0335d/vendor/lib64/hw/android.hardware.memtrack@1.0-impl.so:system/vendor/lib64/hw/android.hardware.memtrack@1.0-impl.so
+
+PRODUCT_COPY_FILES += $(V11_DISP_64)
+
+V11_DISP_32 := \
+    vendor/gree/g0335d/vendor/lib/hw/hwcomposer.msm8996.so:system/vendor/lib/hw/hwcomposer.msm8996.so \
+    vendor/gree/g0335d/vendor/lib/libsdmcore.so:system/vendor/lib/libsdmcore.so \
+    vendor/gree/g0335d/vendor/lib/libsdmutils.so:system/vendor/lib/libsdmutils.so \
+    vendor/gree/g0335d/vendor/lib/libsdmextension.so:system/vendor/lib/libsdmextension.so \
+    vendor/gree/g0335d/vendor/lib/libsdm-color.so:system/vendor/lib/libsdm-color.so \
+    vendor/gree/g0335d/vendor/lib/libsdm-diag.so:system/vendor/lib/libsdm-diag.so \
+    vendor/gree/g0335d/vendor/lib/libsdm-disp-vndapis.so:system/vendor/lib/libsdm-disp-vndapis.so \
+    vendor/gree/g0335d/vendor/lib/libqdutils.so:system/vendor/lib/libqdutils.so \
+    vendor/gree/g0335d/vendor/lib/libqdMetaData.so:system/vendor/lib/libqdMetaData.so \
+    vendor/gree/g0335d/vendor/lib/libdrmutils.so:system/vendor/lib/libdrmutils.so \
+    vendor/gree/g0335d/vendor/lib/libqservice.so:system/vendor/lib/libqservice.so \
+    vendor/gree/g0335d/vendor/lib/libhwc2on1adapter.so:system/vendor/lib/libhwc2on1adapter.so \
+    vendor/gree/g0335d/vendor/lib/vendor.display.config@1.0_vendor.so:system/vendor/lib/vendor.display.config@1.0_vendor.so \
+    vendor/gree/g0335d/vendor/lib/vendor.display.config@1.1_vendor.so:system/vendor/lib/vendor.display.config@1.1_vendor.so \
+    vendor/gree/g0335d/vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so:system/vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so \
+    vendor/gree/g0335d/vendor/lib/hw/android.hardware.graphics.composer@2.1-impl.so:system/vendor/lib/hw/android.hardware.graphics.composer@2.1-impl.so
+
+PRODUCT_COPY_FILES += $(V11_DISP_32)
+
+# === v11b: libscalar.so (SDM prints "libscalar.so not present" without it) ===
+PRODUCT_COPY_FILES += \
+    vendor/gree/g0335d/vendor/lib64/libscalar.so:system/vendor/lib64/libscalar.so \
+    vendor/gree/g0335d/vendor/lib/libscalar.so:system/vendor/lib/libscalar.so
+
+
 # Camera: 32-bit libs needed by camera.msm8996.so / mm-qcamera-daemon
 # (dependency closure; were missing on device -> camera HAL failed to load)
 PRODUCT_COPY_FILES += \
@@ -551,3 +599,21 @@ PRODUCT_COPY_FILES += \
     vendor/gree/g0335d/vendor/lib/libC2D2.so:system/vendor/lib/libC2D2.so \
     vendor/gree/g0335d/vendor/lib/libgsl.so:system/vendor/lib/libgsl.so \
     vendor/gree/g0335d/vendor/lib/libOpenCL.so:system/vendor/lib/libOpenCL.so
+
+# Bluetooth HAL (QTI): without it com.android.bluetooth aborts with
+# "Check failed: btHci != nullptr"
+PRODUCT_COPY_FILES += \
+    vendor/gree/g0335d/vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti:system/vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti \
+    vendor/gree/g0335d/vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc:system/vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc \
+    vendor/gree/g0335d/vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so:system/vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so \
+    vendor/gree/g0335d/vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so:system/vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so \
+    vendor/gree/g0335d/vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so:system/vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
+
+# Stock 7.1.2 protobuf (2.6-era ABI) for the CNE blobs. Renamed so it does
+# not clash with Android 8.1's libprotobuf-cpp-*; libcne, libcneapiclient
+# and libsettings have their DT_NEEDED patched to these names.
+PRODUCT_COPY_FILES += \
+    vendor/gree/g0335d/proprietary/vendor/lib/libprotobuf-cpp-lit7.so:system/vendor/lib/libprotobuf-cpp-lit7.so \
+    vendor/gree/g0335d/proprietary/vendor/lib/libprotobuf-cpp-ful7.so:system/vendor/lib/libprotobuf-cpp-ful7.so \
+    vendor/gree/g0335d/proprietary/vendor/lib64/libprotobuf-cpp-lit7.so:system/vendor/lib64/libprotobuf-cpp-lit7.so \
+    vendor/gree/g0335d/proprietary/vendor/lib64/libprotobuf-cpp-ful7.so:system/vendor/lib64/libprotobuf-cpp-ful7.so
